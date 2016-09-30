@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["joahking@gmail.com"]
 
   spec.summary       = %q{Do A/B Tests in Rails in a simple way.}
-  spec.description   = %q{Do A/B Tests in Rails in a simple way.}
+  spec.description   = %q{Do A/B Tests in Rails using small helpers and patterns.}
   spec.homepage      = "https://github.com/joahking/rails_ab_test"
   spec.license       = "MIT"
 
