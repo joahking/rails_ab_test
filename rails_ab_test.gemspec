@@ -7,11 +7,11 @@ Gem::Specification.new do |spec|
   spec.name          = "rails_ab_test"
   spec.version       = RailsAbTest::VERSION
   spec.authors       = ["Joaquin Rivera Padron"]
-  spec.email         = ["joaquin.rivera@xing.com"]
+  spec.email         = ["joahking@gmail.com"]
 
-  spec.summary       = %q{TODO: Write a short summary, because Rubygems requires one.}
-  spec.description   = %q{TODO: Write a longer description or delete this line.}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.summary       = %q{Do A/B Tests in Rails in a simple way.}
+  spec.description   = %q{Do A/B Tests in Rails in a simple way.}
+  spec.homepage      = "https://github.com/joahking/rails_ab_test"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
