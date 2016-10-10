@@ -1,6 +1,6 @@
 # Public: helpers for your controllers and views.
 #
-module SeoLandingPages
+module RailsAbTest
   module Helper
 
     # Public: renders A/B Test versions of same template/partial.
