@@ -11,7 +11,9 @@ module RailsAbTest
     protected
 
     # Internal: generates the AB version, i.e. randomly (50%) "A" or "B".
-    # Example: before_filter :choose_ab_test or read README for other examples.
+    # Examples
+    #   before_filter :choose_ab_test or read README for other examples.
+    #
     # The version s accessible in controllers, views and helpers as @ab_test.
     #
     # For testing/QA purposes: If the parameter ab_test=A is appended to the url,

@@ -4,9 +4,13 @@ module RailsAbTest
   module Helper
 
     # Public: renders A/B Test versions of same template/partial.
-    # options - hash to render a partial versioned by A/B Test. Optional.
-    #           If options is not passed a template render by controller.action_name is done.
-    # Example: render_ab partial: 'my_partial', a_variable_for_the_partial: 'xyz'
+    #
+    # options - hash. Optional.
+    #           If not passed a template render by controller.action_name is done.
+    #           If passed it should has the form { partial: 'partial_name' }
+    #
+    # Examples
+    #   render_ab partial: 'my_partial', a_variable_for_the_partial: 'xyz'
     #
     def render_ab(options = {})
       # TODO: should/can be extended to cover more render usages
