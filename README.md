@@ -38,6 +38,7 @@ include RailsAbTest::Controller
 Then for the action (index in the example) that  will be A/B Tested set a `before_filter`:
 
 ```ruby
+# posts controller
 before_filter :choose_ab_test, only: :index
 ```
 
@@ -47,6 +48,7 @@ From here the version chosen will be accessible in the variable `@ab_test`.
 Then inside the action you need to replace `render` with `render_ab`
 
 ```ruby
+# posts controller
 def index
   render_ab
 end
@@ -74,14 +76,29 @@ that will make sure the version A is selected.
 Then instead of a `before_filter` you can call the method `choose_ab_test` directly:
 
 ```ruby
+# posts controller
 def show
   choose_ab_test ['A', 'B', 'C'] # this action calls the method directly instead
+  render_ab
 end
 ```
 
 Again the 3 versions will have the same probability of being chosen.
 
 *NOTE:* in the current version the gem does not support having different probabilities for the versions.
+
+### 2 actions 1 template
+
+Imagine that the actions `index` and `archive` are both A/B versioned and they share the same template, `index` will not change, but `archive` needs to explicitly render the `index` template:
+
+```ruby
+# posts controller
+before_filter :choose_ab_test, only: :index, :archive
+
+def archive
+  render_ab template: 'index'
+end
+```
 
 ### Versioned partials
 
@@ -104,7 +121,9 @@ Based on the variable `@ab_test` you can also make conditions in views and helpe
   version A is rendered
 - else
   hello B
+```
 
+```ruby
 # a view helper
 def helper_method_AB_versioned
   if @ab_test == 'A'
@@ -115,11 +134,12 @@ def helper_method_AB_versioned
 end
 ```
 
-### Several pages sharing same version
+### Several pages sharing the same A/B version
 
-Now imagine that 2 controllers (e.g. posts and authors) index actions are A/B versioned,
+Now imagine that the `index` actions of 2 controllers (e.g. `posts` and `authors`) are A/B versioned,
 and that you want that when an user sees version A of `posts#index` she should also see version A of `authors#index`.
-This can be easily achieved by overriding the method `choose_ab_test` in both controllers, and using a cookie:
+
+This can be achieved by overriding the method `choose_ab_test` in both controllers, and using a cookie:
 
 ```ruby
 # posts controller
@@ -133,7 +153,7 @@ end
 # authors controller should have the same code as above
 ```
 
-Of course you can extract the common code to a central place. Also name the cookie with a name that makes sense, and expire it, sign it or encrypt it as needed.
+Of course you can extract the common code to a central place. Also name the cookie with a name that makes sense for you, and expire it, sign it or encrypt it as needed.
 
 ## Contributing
 
