@@ -5,6 +5,7 @@ module RailsAbTest
     extend ActiveSupport::Concern
 
     included do
+      include RailsAbTest::Helper
       helper RailsAbTest::Helper
     end
 
