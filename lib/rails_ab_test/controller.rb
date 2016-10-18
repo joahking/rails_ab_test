@@ -24,7 +24,6 @@ module RailsAbTest
     # - accept different probabilities of each version to e.g. 75%, 25%
     #
     def choose_ab_test(ab_tests: ['A', 'B'])
-      #TODO add cookie and configure it's usage
       @ab_test = if ab_tests.include? params[:ab_test]
                    # support to test/QA page versions
                    params[:ab_test]
