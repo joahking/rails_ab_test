@@ -38,7 +38,7 @@ include RailsAbTest::Controller
 Then for the action (`index` in the example) that will be A/B Tested set a `before_filter`:
 
 ```ruby
-# posts controller
+# a controller
 before_filter :choose_ab_test, only: :index
 ```
 
@@ -48,7 +48,7 @@ From here the version chosen will be accessible in your views and helpers in the
 Then inside the action you need to replace `render` with `render_ab`
 
 ```ruby
-# posts controller
+# a controller
 def index
   render_ab
 end
@@ -76,7 +76,7 @@ that will make sure the version A is selected.
 Then instead of a `before_filter` you can call the method `choose_ab_test` directly:
 
 ```ruby
-# posts controller
+# a controller
 def show
   choose_ab_test ['A', 'B', 'C'] # this action calls the method directly instead
   render_ab
@@ -92,7 +92,7 @@ Again the 3 versions will have the same probability of being chosen.
 Imagine that the actions `index` and `archive` are both A/B versioned and they share the same template. The action `index` will not change, but `archive` needs to explicitly render the `index` template like this:
 
 ```ruby
-# posts controller
+# a controller
 before_filter :choose_ab_test, only: :index, :archive
 
 def archive
@@ -162,7 +162,7 @@ Of course you can extract the common code to a central place. Also name the cook
 If an user should always see the same A/B version of a page, the same method above and a cookie work perfectly:
 
 ```ruby
-# posts controller
+# a controller
 before_filter :choose_ab_test, only: :index
 
 ...
@@ -171,8 +171,6 @@ def choose_ab_test
   @ab_test = cookies['shared-version-posts-authors'] || super
   cookies['shared-version-posts-authors'] = @ab_test
 end
-
-# authors controller should have the same code as above
 ```
 
 ## Contributing
