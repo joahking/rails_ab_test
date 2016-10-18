@@ -2,7 +2,7 @@
 
 Perform A/B Testing in your Rails app with ease.
 
-The framework is a combination of
+The idea is a combination of
 
 - minimal Code to support A/B Test versioning, is provided by this gem.
 - A simple Pattern to organize the code in views into separated versions for each A/B Test version.
