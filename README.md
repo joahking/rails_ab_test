@@ -1,8 +1,11 @@
 # RailsAbTest
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/rails_ab_test`. To experiment with that code, run `bin/console` for an interactive prompt.
+Perform A/B Testing in your Rails app with ease.
 
-TODO: Delete this and the text above, and describe your gem
+The framework is a combination of
+
+- minimal Code to support A/B Test versioning, is provided by this gem.
+- A simple Pattern to organize the code in views into separated versions for each A/B Test version.
 
 ## Installation
 
@@ -22,20 +25,53 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Let's start with the simplest usage case:
 
-## Development
+### The Code
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+Configure your ApplicationController by including the module:
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+```ruby
+# application_controller.rb
+include RailsAbTest::Controller
+```
+
+Then in the controller where an action (index in the example) will be A/B Tested,
+set a `before_filter`:
+
+```ruby
+before_filter :choose_ab_test, only: :index
+```
+
+The method `choose_ab_test` will randomly (with 50% probability) choose A or B as the A/B Test version.
+From here the version chosen will be accessible in the variable `@ab_test`.
+
+Then inside the action you need to change `render` with `render_ab`
+
+```ruby
+def index
+  render_ab
+end
+```
+
+`render_ab` will infer the template to render from the action name, and prepend it with `@ab_test` to fully
+determine the template name. e.g. if the A/B Version is A it will render the template `index_A`.
+
+### The Pattern
+
+Now you need to make 2 copies of your index view template, and name it `index_A` for the A/B Test version A, and
+`index_B` for B.
+
+And you are good to go. Your controller index action is ready to be A/B Tested.
+
+## More complex usage
+
+TODO
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/rails_ab_test.
-
+Bug reports and pull requests are welcome on GitHub at https://github.com/joahking/rails_ab_test.
 
 ## License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-
