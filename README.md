@@ -29,15 +29,13 @@ Let's start with the simplest usage case:
 
 ### The Code
 
-Configure your ApplicationController by including the module:
+Configure your controllers by including the module (ApplicationController is a good candidate for this):
 
 ```ruby
-# application_controller.rb
 include RailsAbTest::Controller
 ```
 
-Then in the controller where an action (index in the example) will be A/B Tested,
-set a `before_filter`:
+Then for the action (index in the example) that  will be A/B Tested set a `before_filter`:
 
 ```ruby
 before_filter :choose_ab_test, only: :index
